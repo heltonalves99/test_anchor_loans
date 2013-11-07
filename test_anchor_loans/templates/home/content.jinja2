@@ -1,0 +1,39 @@
+{% extends "templates/base.jinja2" %}
+
+{% block content %}
+<header class="container">
+	<h1 class="title-site text-center">Test Anchor Loans</h1>
+</header>
+<div class="container">
+	<div class="wall-left visible-md visible-lg col-md-3">
+		<nav class="bar-menu">
+			<ul class="list-unstyled">
+				<li><a href="/">Home</a></li>
+			</ul>
+		</nav>
+		<address class="profile">
+		<h3>About me:</h3>
+			<strong>Helton Alves</strong>
+			<p>Working with web programming to more or less two years, using Python.</p>
+			<p>Development Front-end and Back-end.</p>
+			<p>Settings web servers, Nginx and Apache, Git.</p>
+			<p><abbr title="Phone">Phone:</abbr>(99) 8110-3480</p>
+			<p><abbr title="Email">Email:</abbr>helton99@hotmail.com</p>
+		</address>
+	</div>
+	<div class="col-md-9">
+		{% for obj in list_post %}
+			<article class="list-post col-md-12">
+				<time>{{ obj.date }}</time>
+				<a href="/list-post/{{ obj.slug }}">
+					<h3>{{ obj.title }}</h3>
+				</a>
+				<p><strong>Author: </strong>{{ obj.author }}</p>
+				<div>
+					{{ obj.content }}
+				</div>
+			</article>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

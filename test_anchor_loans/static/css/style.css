@@ -1,0 +1,28 @@
+body{
+	background: url('../img/bg_body.png');
+}
+.title-site{
+	border-bottom: 1px solid #ccc;
+	text-shadow: 0 2px 3px #ccc;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+	font-size: 80px;
+	color: #444;
+}
+.bar-menu li a{
+	font-size: 14px;
+}
+.profile{
+	border-top: 1px solid #ccc;
+	padding-top: 20px;
+	margin-top: 30px;
+}
+.list-post{
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	margin: 20 0;
+}
+.list-post h3{
+	margin-top: 0;
+}
