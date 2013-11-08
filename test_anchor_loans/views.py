@@ -1,13 +1,28 @@
 # -*- coding: utf-8 -*-
 from pyramid.view import view_config
+from pyramid_simpleform import Form
+from pyramid_simpleform.renderers import FormRenderer
+from schema import CommentSchema
 
+
+def my_view(request):
+    return {}
 
 @view_config(route_name='home', renderer='templates/home/content.jinja2')
 def home(request):
+	# defining numbers of pages and number of posts
+	num_list_post = 1
+	num_page = 2
 
-    object_list = request.db['post'].find()
-    list_post = []
-    for obj in object_list:
+	if request.GET.get('page'):
+		page = int(request.GET.get('page'))
+	else:
+		page = 1
+
+	row = num_list_post * (page - 1)
+	object_list = request.db['post'].find()[row: row + num_list_post]
+	list_post = []
+	for obj in object_list:
 		post = {
 				"_id": obj[u'_id'],
 				"author": obj[u'author'],
@@ -18,8 +33,19 @@ def home(request):
 				}
 		list_post.append(post)
 
-    return {'list_post': list_post}
+	# pagination garation
+	page_list = []
+	for page in range(num_page):
+		page_list.append(page + 1)
 
-@view_config(route_name='list_post', renderer='templates/base.jinja2')
-def list_post(request):
-	return {}
+	return {'list_post': list_post, 'page_list': page_list}
+
+@view_config(route_name='detail_post', renderer='templates/post/detail_post.jinja2')
+def detail_post(request, slug):
+	slug = slug.matchdict['slug']
+	post = request.db['post'].find_one({'slug': slug})
+
+	# post comment
+	form_comment = Form(request, schema=CommentSchema)
+
+	return {'post': post, 'form_comment': FormRenderer(form_comment)}

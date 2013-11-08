@@ -1,0 +1,7 @@
+<nav class="pagination col-md-12 text-center">
+	<ul class="list-inline">
+		{% for obj in page_list %}
+			<li><a class="text-primary" href="?page={{ obj }}">{{ obj }}</a></li>
+		{% endfor %}
+	</ul>
+</nav>

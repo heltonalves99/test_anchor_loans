@@ -1,3 +1,4 @@
+from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from pyramid.config import Configurator
 from pyramid.events import subscriber
 from pyramid.events import NewRequest
@@ -8,11 +9,17 @@ from test_anchor_loans.resources import Root
 def main(global_config, **settings):
     """ This function returns a WSGI application.
     """
-    config = Configurator(settings=settings, root_factory=Root) 
+    my_session_factory = UnencryptedCookieSessionFactoryConfig('itsaseekreet')
+    config = Configurator(settings=settings, root_factory=Root,
+            session_factory=my_session_factory)
+
+    config.add_view('test_anchor_loans.views.my_view',
+                    context='test_anchor_loans:resources.Root',
+                    renderer='test_anchor_loans:templates/home/content.jinja2') 
     
     #adding route
     config.add_route('home', '/')
-    config.add_route('list_post', '/list-post')
+    config.add_route('detail_post', '/list-post/{slug}')
 
     config.add_static_view('static', 'test_anchor_loans:static')
     # MongoDB

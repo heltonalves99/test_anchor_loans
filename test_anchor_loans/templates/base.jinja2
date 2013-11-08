@@ -21,8 +21,30 @@
         <script src="{{ request.static_url("test_anchor_loans:static/lib/modernizr-2.6.2.min.js") }}"></script>
     </head>
     <body> 
-
+        <header class="container">
+    <h1 class="title-site text-center">Test Anchor Loans</h1>
+</header>
+    <div class="container">
+        <div class="wall-left visible-md visible-lg col-md-3">
+            <nav class="bar-menu">
+                <ul class="list-unstyled">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </nav>
+            <address class="profile">
+            <h3>About me:</h3>
+                <strong>Helton Alves</strong>
+                <p>Working with web programming to more or less two years, using Python.</p>
+                <p>Development Front-end and Back-end.</p>
+                <p>Settings web servers, Nginx and Apache, Git.</p>
+                <p><abbr title="Phone">Phone:</abbr>(99) 8110-3480</p>
+                <p><abbr title="Email">Email:</abbr>helton99@hotmail.com</p>
+            </address>
+        </div>
+        <div class="col-md-9">
         {% block content %}{% endblock %}
+        </div>
+    </div>
         
         <script src="{{ request.static_url("test_anchor_loans:static/js/jquery-1.10.2.min.js") }}"></script>
         <script src="{{ request.static_url("test_anchor_loans:static/js/bootstrap.min.js") }}"></script>
