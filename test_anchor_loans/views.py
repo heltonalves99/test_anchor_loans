@@ -2,7 +2,7 @@
 from pyramid.view import view_config
 from pyramid_simpleform import Form
 from pyramid_simpleform.renderers import FormRenderer
-from schema import CommentSchema
+from .forms import CommentCreateForm, CommentUpdateForm
 
 
 def my_view(request):
@@ -45,7 +45,4 @@ def detail_post(request, slug):
 	slug = slug.matchdict['slug']
 	post = request.db['post'].find_one({'slug': slug})
 
-	# post comment
-	form_comment = Form(request, schema=CommentSchema)
-
-	return {'post': post, 'form_comment': FormRenderer(form_comment)}
+	return {'post': post}
